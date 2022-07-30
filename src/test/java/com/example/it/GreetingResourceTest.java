@@ -40,7 +40,7 @@ public class GreetingResourceTest {
                     .asCompatibleSubstituteFor("jboss/wildfly")
     )
             .withExposedPorts(8080, 9990)
-            .withCreateContainerCmdModifier(cmd -> cmd.withCmd("/opt/jboss/wildfly/bin/add-user.sh admin Admin@123 --silent").exec())
+            .withCreateContainerCmdModifier(cmd -> cmd.withCmd("/opt/jboss/wildfly/bin/add-user.sh", "admin", "Admin@123", "--silent").exec())
             .withCommand("/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0");
 
     @BeforeDeployment
