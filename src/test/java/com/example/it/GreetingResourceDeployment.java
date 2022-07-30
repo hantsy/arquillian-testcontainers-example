@@ -24,7 +24,7 @@ public class GreetingResourceDeployment implements AutomaticDeployment {
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 
         return new DeploymentContentBuilder(war)
-                .withDeployment()
+                .withDeployment().withTestable(false)// client test.
                 .build()
                 .get();
     }

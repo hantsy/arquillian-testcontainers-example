@@ -22,6 +22,7 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,7 +41,10 @@ public class GreetingResourceTest {
                     .asCompatibleSubstituteFor("jboss/wildfly")
     )
             .withExposedPorts(8080, 9990)
-            .withCreateContainerCmdModifier(cmd -> cmd.withCmd("/opt/jboss/wildfly/bin/add-user.sh", "admin", "Admin@123", "--silent").exec())
+            .withCreateContainerCmdModifier(cmd -> {
+                var createAdmin = cmd.withCmd("/opt/jboss/wildfly/bin/add-user.sh", "admin", "Admin@123", "--silent").exec().getRawValues();
+                LOGGER.log(Level.INFO, "Creating admin user in WildFly container: {0}", createAdmin);
+            })
             .withCommand("/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0");
 
     @BeforeDeployment
