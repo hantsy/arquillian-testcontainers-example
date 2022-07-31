@@ -6,6 +6,7 @@ import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.jboss.arquillian.container.test.api.BeforeDeployment;
+import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit5.ArquillianExtension;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.Archive;
@@ -75,6 +76,7 @@ public class GreetingResourceTest {
     }
 
     @Test
+    @RunAsClient
     @DisplayName("Given a name:`JakartaEE` should return `Say Hello to JakartaEE`")
     public void should_create_greeting() throws MalformedURLException {
         LOGGER.log(Level.INFO, " client: {0}, baseURL: {1}", new Object[]{client, base});
