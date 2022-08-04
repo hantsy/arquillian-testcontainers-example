@@ -23,7 +23,6 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,12 +34,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class GreetingResourceTest {
     private final static Logger LOGGER = Logger.getLogger(GreetingResourceTest.class.getName());
 
+    private final static DockerImageName IMAGE_NAME = DockerImageName
+            .parse("quay.io/wildfly/wildfly")
+            .asCompatibleSubstituteFor("jboss/wildfly");
     @Container
-    static GenericContainer wildfly = new GenericContainer<>(
-            DockerImageName
-                    .parse("quay.io/wildfly/wildfly")
-                    .asCompatibleSubstituteFor("jboss/wildfly")
-    )
+    static GenericContainer wildfly = new GenericContainer<>(IMAGE_NAME)
             .withExposedPorts(8080, 9990)
             .withCreateContainerCmdModifier(cmd -> {
                 var createAdmin = cmd.withCmd("/opt/jboss/wildfly/bin/add-user.sh", "admin", "Admin@123", "--silent").exec().getRawValues();
@@ -49,7 +47,7 @@ public class GreetingResourceTest {
             .withCommand("/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0");
 
     @BeforeDeployment
-    public static Archive<?> beforeDeployment(Archive<?> archive) {
+    public static Archive beforeDeployment(Archive archive) {
         Wait.forListeningPort().waitUntilReady(wildfly);
         LOGGER.log(Level.INFO, "deployment files: {}", archive.toString(true));
         return archive;
