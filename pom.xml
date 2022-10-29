@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>arquillian-autodeployment-example</name>
-    <description>Example using Arquillian 1.7.0.Alpha11 AutoDeployment Feature</description>
+    <description>Example using Arquillian 1.7.0 AutoDeployment Feature</description>
 
     <properties>
         <!-- Global Maven settings -->
@@ -38,7 +38,7 @@
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
 
         <!-- Arquillian 1.7.0 adds Jakarta EE 9 and JUnit 5 support-->
-        <arquillian-bom.version>1.7.0.Alpha12</arquillian-bom.version>
+        <arquillian-bom.version>1.7.0.Alpha13</arquillian-bom.version>
         <junit-jupiter.version>5.9.0</junit-jupiter.version>
 
         <!-- Test Utilities -->
