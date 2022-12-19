@@ -33,9 +33,12 @@
 
         <!-- Cargo maven plugin to deploy apps to Glassfish/Payara servers -->
         <cargo-maven3-plugin.version>1.9.13</cargo-maven3-plugin.version>
-
+        
         <!-- Jakarta EE API 9.1.0 adds Java 11 support-->
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
+    
+        <!-- Logging -->
+        <slf4j.version>1.7.36</slf4j.version>
 
         <!-- Arquillian 1.7.0 adds Jakarta EE 9 and JUnit 5 support-->
         <arquillian-bom.version>1.7.0.Alpha13</arquillian-bom.version>
@@ -182,6 +185,18 @@
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
         </dependency>
+    
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        
         <dependency>
             <groupId>org.jboss.arquillian.junit5</groupId>
             <artifactId>arquillian-junit5-container</artifactId>
