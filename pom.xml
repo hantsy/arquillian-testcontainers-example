@@ -64,13 +64,13 @@
         <jersey.version>3.0.5</jersey.version>
 
         <!-- Payara server -->
-        <payara.version>6.2022.1.Alpha3</payara.version>
-        <arquillian-payara.version>3.0.alpha6</arquillian-payara.version>
+        <payara.version>6.2022.2</payara.version>
+        <arquillian-payara.version>3.0.alpha7</arquillian-payara.version>
 
         <!-- Wildfly server -->
-        <wildfly.version>26.1.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>3.0.2.Final</wildfly-maven-plugin.version>
-        <wildfly-arquillian.version>5.0.0.Alpha3</wildfly-arquillian.version>
+        <wildfly.version>27.0.1.Final</wildfly.version>
+        <wildfly-maven-plugin.version>4.0.0.Final</wildfly-maven-plugin.version>
+        <wildfly-arquillian.version>5.0.0.Alpha6</wildfly-arquillian.version>
         <wildfly-jar-maven-plugin.version>7.0.2.Final</wildfly-jar-maven-plugin.version>
         <openshift-maven-plugin.version>1.8.0</openshift-maven-plugin.version>
         <!-- websockets-jsr and resteasy for client, aligned with Wildfly version. -->
@@ -399,7 +399,7 @@
                 <dependency>
                     <groupId>org.jboss.remoting</groupId>
                     <artifactId>jboss-remoting</artifactId>
-                    <version>5.0.25.Final</version>
+                    <version>5.0.27.Final</version>
                     <scope>test</scope>
                 </dependency>
                 <dependency>
