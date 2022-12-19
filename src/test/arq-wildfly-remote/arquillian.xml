@@ -8,7 +8,7 @@
     </engine>
 
     <!-- Configuration to be used when the WidlFly remote profile is active -->
-    <container qualifier="wildfly-remote">
+    <container qualifier="wildfly-remote" default="true">
         <configuration>
             <property name="managementAddress">127.0.0.1</property>
             <property name="managementPort">9990</property>
