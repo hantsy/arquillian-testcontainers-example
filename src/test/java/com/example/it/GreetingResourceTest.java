@@ -29,8 +29,8 @@ import java.util.logging.Logger;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-@ExtendWith(ArquillianExtension.class)
 @Testcontainers
+@ExtendWith(ArquillianExtension.class)
 public class GreetingResourceTest {
     private final static Logger LOGGER = Logger.getLogger(GreetingResourceTest.class.getName());
 
