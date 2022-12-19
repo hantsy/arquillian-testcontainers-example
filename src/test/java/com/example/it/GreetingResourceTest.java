@@ -15,16 +15,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.wait.strategy.Wait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,24 +30,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @ExtendWith(ArquillianExtension.class)
 public class GreetingResourceTest {
-    private final static Logger LOGGER = Logger.getLogger(GreetingResourceTest.class.getName());
-
-    private final static DockerImageName IMAGE_NAME = DockerImageName
-            .parse("quay.io/wildfly/wildfly")
-            .asCompatibleSubstituteFor("jboss/wildfly");
+    private final static Logger LOGGER = LoggerFactory.getLogger(GreetingResourceTest.class);
+    private final static Slf4jLogConsumer consumer = new Slf4jLogConsumer(LOGGER);
+    
     @Container
-    static GenericContainer wildfly = new GenericContainer<>(IMAGE_NAME)
-            .withExposedPorts(8080, 9990)
-            .withCreateContainerCmdModifier(cmd -> {
-                var createAdmin = cmd.withCmd("/opt/jboss/wildfly/bin/add-user.sh", "admin", "Admin@123", "--silent").exec().getRawValues();
-                LOGGER.log(Level.INFO, "Creating admin user in WildFly container: {0}", createAdmin);
-            })
-            .withCommand("/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0");
-
+    static WildflyContainer wildfly = new WildflyContainer();//.withLogConsumer(consumer);
+            
     @BeforeDeployment
-    public static Archive beforeDeployment(Archive archive) {
-        Wait.forListeningPort().waitUntilReady(wildfly);
-        LOGGER.log(Level.INFO, "deployment files: {}", archive.toString(true));
+    public static Archive beforeDeployment(Archive archive) throws InterruptedException {
+        LOGGER.info("deployment files: {}", archive.toString(true));
         return archive;
     }
 
@@ -77,7 +66,7 @@ public class GreetingResourceTest {
     @RunAsClient
     @DisplayName("Given a name:`JakartaEE` should return `Say Hello to JakartaEE`")
     public void should_create_greeting() throws MalformedURLException {
-        LOGGER.log(Level.INFO, " client: {0}, baseURL: {1}", new Object[]{client, base});
+        LOGGER.info(" client: {}, baseURL: {}", client, base);
         final var greetingTarget = this.client.target(new URL(this.base, "api/greeting/JakartaEE").toExternalForm());
         try (final Response greetingGetResponse = greetingTarget.request()
                 .accept(MediaType.APPLICATION_JSON)
