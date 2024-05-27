@@ -42,11 +42,8 @@
         <arquillian-bom.version>1.8.0.Final</arquillian-bom.version>
         <junit-jupiter.version>5.10.2</junit-jupiter.version>
         <testcontainers.version>1.19.8</testcontainers.version>
+        <assertj.version>3.25.3</assertj.version>
 
-        <!-- Glassfish  -->
-        <glassfish.version>7.0.14</glassfish.version>
-        <jersey.version>3.1.7</jersey.version>
-             
         <!-- WildFly -->
         <wildfly.version>32.0.0.Final</wildfly.version>
         <wildfly-maven-plugin.version>5.0.0.Final</wildfly-maven-plugin.version>
@@ -127,6 +124,17 @@
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -244,7 +252,7 @@
                 <skip.integration.tests>false</skip.integration.tests>
             </properties>
             <dependencies>
-                <!--<dependency>
+                <dependency>
                     <groupId>org.jboss.resteasy</groupId>
                     <artifactId>resteasy-client</artifactId>
                     <version>${resteasy.version}</version>
@@ -254,25 +262,6 @@
                     <groupId>org.jboss.resteasy</groupId>
                     <artifactId>resteasy-jackson2-provider</artifactId>
                     <version>${resteasy.version}</version>
-                    <scope>test</scope>
-                </dependency>-->
-                <!-- use Jersey client instead -->
-                <dependency>
-                    <groupId>org.glassfish.jersey.media</groupId>
-                    <artifactId>jersey-media-json-binding</artifactId>
-                    <version>${jersey.version}</version>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.glassfish.jersey.inject</groupId>
-                    <artifactId>jersey-hk2</artifactId>
-                    <version>${jersey.version}</version>
-                    <scope>test</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.glassfish.jersey.core</groupId>
-                    <artifactId>jersey-client</artifactId>
-                    <version>${jersey.version}</version>
                     <scope>test</scope>
                 </dependency>
 
