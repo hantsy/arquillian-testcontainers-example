@@ -9,82 +9,41 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>arquillian-autodeployment-example</name>
-    <description>Example using Arquillian 1.7.0 AutoDeployment Feature</description>
+    <description>Arquillian and TestContainers Integration Example</description>
 
     <properties>
         <!-- Global Maven settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <!--Glassfish v6.1+, Java 11 is supported -->
-        <maven.compiler.release>17</maven.compiler.release>
-
-
+             
+        <maven.compiler.release>21</maven.compiler.release>
+             
         <!-- The default value is changed to `false` since maven-war-plugin 3.0.0 -->
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Official Maven Plugins -->
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
-        <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
+        <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
-        <maven-surefire-report-plugin.version>3.0.0-M7</maven-surefire-report-plugin.version>
+        <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
+        <maven-surefire-report-plugin.version>3.2.5</maven-surefire-report-plugin.version>
 
         <!-- Cargo maven plugin to deploy apps to Glassfish/Payara servers -->
-        <cargo-maven3-plugin.version>1.9.13</cargo-maven3-plugin.version>
+        <cargo-maven3-plugin.version>1.10.12</cargo-maven3-plugin.version>
 
-        <!-- Jakarta EE API 9.1.0 adds Java 11 support-->
-        <jakartaee-api.version>10.0.0</jakartaee-api.version>
-
+        <!-- Jakarta EE API 10-->
+        <jakartaee-api.version>10.0.0</jakartaee-api.version>  
+        
         <!-- Arquillian 1.7.0 adds Jakarta EE 9 and JUnit 5 support-->
-        <arquillian-bom.version>1.7.0.Alpha13</arquillian-bom.version>
-        <junit-jupiter.version>5.9.0</junit-jupiter.version>
+        <arquillian-bom.version>1.8.0.Final</arquillian-bom.version>
+        <junit-jupiter.version>5.10.2</junit-jupiter.version>
+        <testcontainers.version>1.19.8</testcontainers.version>
 
-        <!-- Test Utilities -->
-        <mockito.version>4.6.1</mockito.version>
-        <json-path.version>2.9.0</json-path.version>
-        <awaitility.version>4.2.0</awaitility.version>
-        <hamcrest.version>2.2</hamcrest.version>
-        <jsonassert.version>1.5.1</jsonassert.version>
-        <assertj.version>3.23.1</assertj.version>
-
-        <!-- Jacoco code coverage report -->
-        <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
-
-        <!-- Glassfish server -->
-        <glassfish.version>6.2.5</glassfish.version>
-        <arquillian-glassfish6.version>1.0.0.Alpha1</arquillian-glassfish6.version>
-        <jersey.version>3.0.5</jersey.version>
-
-        <!-- Payara server -->
-        <payara.version>6.2022.1.Alpha3</payara.version>
-        <arquillian-payara.version>3.0.alpha6</arquillian-payara.version>
-
-        <!-- Wildfly server -->
-        <wildfly.version>26.1.1.Final</wildfly.version>
+        <!-- WildFly -->
+        <wildfly.version>31.0.1.Final</wildfly.version>
         <wildfly-maven-plugin.version>5.0.0.Final</wildfly-maven-plugin.version>
-        <wildfly-arquillian.version>5.0.0.Alpha3</wildfly-arquillian.version>
-        <wildfly-jar-maven-plugin.version>7.0.2.Final</wildfly-jar-maven-plugin.version>
-        <openshift-maven-plugin.version>1.8.0</openshift-maven-plugin.version>
-        <!-- websockets-jsr and resteasy for client, aligned with Wildfly version. -->
-        <undertow-websockets-jsr.version>2.2.5.Final</undertow-websockets-jsr.version>
-        <resteasy.version>3.15.1.Final</resteasy.version>
-
-        <!-- OpenLiberty server -->
-        <!-- since 21.0.0.11-beta, use jakartaee-9.1 instead of 9.0, 
-             see: https://github.com/OpenLiberty/open-liberty/issues/18822#issuecomment-932164174 
-             since 22.0.0.6, openliberty is promoted from beta.
-             see: https://openliberty.io/blog/2022/06/07/microprofile-graphql-2-22006.html
-         -->       
-        <liberty.runtime.version>22.0.0.7</liberty.runtime.version>
-        <!-- WARNING: 10.15.x.x does not work with openliberty 20.0.0.1 -->
-        <derby.version>10.14.2.0</derby.version>
-        <liberty-maven-plugin.version>3.6.1</liberty-maven-plugin.version>
-        <!-- Jakarta EE 9 support see: https://github.com/OpenLiberty/liberty-arquillian/issues/71 -->
-        <arquillian-liberty-jakarta.version>2.0.2</arquillian-liberty-jakarta.version>
-        <!-- OpenLiberty Jakarta 9 preview uses JBoss Resteasy as the Jaxrs provider. -->
-        <!-- <cxf.version>3.3.5</cxf.version> -->
+        <resteasy.version>6.2.8.Final</resteasy.version>
 
         <!-- By default, skip tests -->
         <skip.unit.tests>true</skip.unit.tests>
@@ -116,65 +75,11 @@
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
-                <version>1.19.8</version>
+                <version></version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest</artifactId>
-                <version>${hamcrest.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.skyscreamer</groupId>
-                <artifactId>jsonassert</artifactId>
-                <version>${jsonassert.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
-            <dependency>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-core</artifactId>
-                <version>${assertj.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- https://mvnrepository.com/artifact/org.awaitility/awaitility -->
-            <dependency>
-                <groupId>org.awaitility</groupId>
-                <artifactId>awaitility</artifactId>
-                <version>${awaitility.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- JSON path -->
-            <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path -->
-            <dependency>
-                <groupId>com.jayway.jsonpath</groupId>
-                <artifactId>json-path</artifactId>
-                <version>${json-path.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path-assert -->
-            <dependency>
-                <groupId>com.jayway.jsonpath</groupId>
-                <artifactId>json-path-assert</artifactId>
-                <version>${json-path.version}</version>
-                <scope>test</scope>
-            </dependency>
-
-            <!-- Mockito -->
-            <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito.version}</version>
-                <scope>test</scope>
-            </dependency>
+           
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -196,31 +101,6 @@
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!--        <dependency>
-                    <groupId>org.junit.jupiter</groupId>
-                    <artifactId>junit-jupiter-params</artifactId>
-                    <scope>test</scope>
-                </dependency>-->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
