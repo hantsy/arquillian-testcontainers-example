@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>arquillian-autodeployment-example</artifactId>
+    <artifactId>arquillian-testcontainers-example</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>arquillian-autodeployment-example</name>
+    <name>arquillian-testcontainers-example</name>
     <description>Arquillian and TestContainers Integration Example</description>
 
     <properties>
