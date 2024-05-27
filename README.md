@@ -1,2 +1,2 @@
-# arquillian-autodeployment-example
-Arquillian AutomaticDeployment example
+# arquillian-testcontainres-example
+Arquillian Testcontainers Integration Example
