@@ -1,2 +1,2 @@
-# arquillian-testcontainres-example
+# arquillian-testcontainers-example
 Arquillian Testcontainers Integration Example
