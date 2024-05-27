@@ -8,14 +8,16 @@
     </engine>
 
     <!-- Configuration to be used when the WidlFly remote profile is active -->
-    <container qualifier="wildfly-remote">
+    <container qualifier="wildfly-remote" default="true">
         <configuration>
-            <property name="managementAddress">127.0.0.1</property>
-            <property name="managementPort">9990</property>
+            <property name="managementAddress">${tc.wildfly.host}</property>
+            <property name="managementPort">${tc.wildfly.admin.port}</property>
             <!-- since wildfly-arquillian 5.0.0 alpha2, the property protocol is deprecated and replaced by the property managementProtocol -->
             <property name="managementProtocol">remote+http</property>
-            <property name="username">admin</property>
-            <property name="password">Admin@123</property>
+            <property name="host">${tc.wildfly.host}</property>
+            <property name="port">${tc.wildfly.http.port}</property>
+            <property name="username">${tc.wildfly.admin.user}</property>
+            <property name="password">${tc.wildfly.admin.pass}</property>
         </configuration>
     </container>
 
