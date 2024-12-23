@@ -42,7 +42,7 @@
         <arquillian-bom.version>1.8.0.Final</arquillian-bom.version>
         <junit-jupiter.version>5.11.3</junit-jupiter.version>
         <testcontainers.version>1.20.4</testcontainers.version>
-        <assertj.version>3.26.3</assertj.version>
+        <assertj.version>3.27.0</assertj.version>
 
         <!-- WildFly -->
         <wildfly.version>32.0.0.Final</wildfly.version>
