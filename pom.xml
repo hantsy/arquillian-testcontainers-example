@@ -33,7 +33,7 @@
         <cargo-maven3-plugin.version>1.10.17</cargo-maven3-plugin.version>
 
         <!-- Jakarta EE API 10-->
-        <jakartaee-api.version>10.0.0</jakartaee-api.version>  
+        <jakartaee-api.version>11.0.0</jakartaee-api.version>  
   
         <!-- Logging -->
         <slf4j.version>2.0.16</slf4j.version>
